@@ -187,7 +187,7 @@ function getEqual() {
     });
 }
 
-function displayEqual(imgUrl){
+function displayEqual(imgUrl) {
     // clearPage();
     currentPageEl.innerHTML = `
     <div class="current-page">
@@ -198,6 +198,29 @@ function displayEqual(imgUrl){
     </div>
 `
 }
+
+
+var modal = document.querySelector('#modal');
+var modalBtn = document.querySelector('#modalBtn');
+var xBtn = document.querySelector('.close');
+
+// when filters button is clicked, modal appears
+modalBtn.addEventListener('click', function () {
+    modal.style.display = 'block';
+});
+
+// when x button inside modal is clicked, modal goes away
+xBtn.addEventListener('click', function () {
+    modal.style.display = 'none';
+});
+
+// when modal is opened and anything is clicked outside modal, modal will close
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+};
+
 
 // // var foodDisplayEl = document.querySelector("#restart-game");
 // // foodDisplayEl.addEventListener("click", highOrLow);

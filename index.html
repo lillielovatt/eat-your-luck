@@ -17,8 +17,8 @@
 <body>
 
     <div class="current-page">
-    
-        
+
+
     </div>
 
     <div class="mx-auto bg-grey-400 grid place-items-center card">
@@ -26,6 +26,7 @@
             <h1 class="text-xl font-bold text-center flex w-100">
                 Search a city!
             </h1>
+
             <input type="text" class="search-bar rounded flex-auto content-evenly">
             <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em"
                     width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -36,6 +37,30 @@
                         d="M11.412,8.586C11.791,8.966,12,9.468,12,10h2c0-1.065-0.416-2.069-1.174-2.828c-1.514-1.512-4.139-1.512-5.652,0 l1.412,1.416C9.346,7.83,10.656,7.832,11.412,8.586z">
                     </path>
                 </svg></button>
+        </div>
+    </div>
+
+
+    <!-- modal search filters for city search -->
+    <!-- insert down arrow icon indicating dropdown onto button text -->
+    <button id="modalBtn">Filters</button>
+
+    <!-- modal content -->
+    <div id="modal" class="modal">
+
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sort By:</h2>
+            <button>Open Now</button>
+            <button>Best Rating</button>
+
+            <h3>Price</h3>
+            <!-- slider for price range. ($-$$$$) - are the price options on yelp -->
+            <input type="range" min="1" max="4" value="1" class="slider" id="myRange">
+
+            <h3>Radius</h3>
+            <!-- slider for radius of search (1 mile - 25 miles) -->
+            <input type="range" min="1" max="25" value="1" class="slider" id="myRange">
         </div>
     </div>
 
