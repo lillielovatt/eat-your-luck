@@ -54,7 +54,8 @@ function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
 
     currentPageEl.innerHTML = `
         <div class="pick-card">
-            <h1>Pick a card!</h1>
+            <h1 class='section-header'>Welcome to Eat Your Luck!</h1>
+            <h1 class='section-header'>Pick a card!</h1>
             <div class="two-cards">
                 <div class="card-one">
                     <img src=${cardOneImg} id="${cardOneId}">

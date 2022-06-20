@@ -1,4 +1,4 @@
-<<<<<<< HEAD body {
+HEAD body {
     background-color: rgba(255, 0, 0, 0.626);
 }
 
@@ -6,7 +6,7 @@ img {
     padding: 0;
 }
 
-=======.card {
+.card {
     background: #eaeaea;
     padding: 2em;
     border-radius: 30px;
@@ -16,8 +16,12 @@ img {
 }
 
 /* will need to convert the above css to tailwind later */
->>>>>>>0f3cd0b4a1ecb472cb35c5487bc65bc22cce8fd2;
+/* >>>>>>>0f3cd0b4a1ecb472cb35c5487bc65bc22cce8fd2; */
 
+
+/* html {
+    background-color: #000;
+} */
 
 /* for some reason this isn't working */
 #modal {
@@ -33,12 +37,38 @@ img {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+body {
+    background-color: #35654d;
+}
+
 .modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+}
+
+.two-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-one,
+.card-two {
+    margin: 1%;
+}
+
+.card-one:hover,
+.card-two:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    cursor: pointer;
+}
+
+.section-header {
+    font-size: 3vw;
+    text-align: center;
 }
 
 .close {
