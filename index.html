@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- our css style sheet /tailwind -->
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <!-- <link rel="stylesheet" href="./assets/css/style.css" /> -->
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Eat Your Luck</title>
     <!-- favicon -->
     <link rel="icon" type="image/png" href="./assets/images/favicon.png">
@@ -19,14 +20,23 @@
 
 <body>
     <header>
-        <div id="myModal" class="modal pt-5 pl-5">
+        <!-- maybe change padding?  -->
+        <div id="myModal" class="px-10 py-6"> 
             <div class="modal-content">
                 <img class="modal-icon"
                     src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Noun_Project_question_mark_icon_1101884_cc.svg">
-                <ol class="modal-content-p"></ol>
+                <div class="modal hidden" id="modal-content">
+                    <h2 class="text-center text-6xl">Welcome to Eat Your Luck!</h2>
+                    <br>
+                    <p class="text-2xl">Are you hungry right now? I bet you are. <br> Wondering what you should make? Aren't we all! <br> With Eat Your Luck,
+                        it's now easier than ever to pick the meal for you, a winner! Or, a <span class="italic">loser?</span>
+                    </p>
+                    <br>
+                    <p class="text-4xl">Why don't you test your luck and find out?</p>
+                </div>
             </div>
         </div>
-        
+
         <!-- want to have the modal using this icon, when you click on it, opens the modal, and explains what the page does/is for  -->
         <!-- when you click out of the modal, takes you back to whatever page you were on -->
         <!-- color scheme - Vegas! Maybe gold? or red, or that Vegas green?  -->
@@ -37,8 +47,6 @@
 
     </div>
 
-
-    
 
 
     <!-- make footer stay at bottom of page? -->

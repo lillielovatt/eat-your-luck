@@ -128,14 +128,14 @@ function pickCard(event) {
             getFood("vegan");
         } else if (userCard === "equal") {
             // then user got same card, congratulate and show the probability 
-            getEqual();
+            displayEqual();
         }
     }
 };
 
 currentPageEl.addEventListener("click", pickCard);
 
-// once the user has chosen a food
+// once the user has chosen a card, then type of food is chosen
 function getFood(typeOfFood) {
     var apiUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${typeOfFood}`;
 
@@ -143,7 +143,6 @@ function getFood(typeOfFood) {
         if (response.ok) {
             response.json().then(function (data) {
                 var foodChoice = randomNumber(0, data.meals.length - 1)
-                // displayFood(data.meals[foodChoice].idMeal);
                 getFoodDetails(data.meals[foodChoice].idMeal);
             });
         } else {
@@ -165,21 +164,22 @@ function getFoodDetails(foodId) {
                 displayFood(data.meals[0]);
             });
         }
+        else{
+            // error message in case the API call doesn't work
+        }
     });
-
-
 }
 
-
-
-
+// ugly function that extracts and organizes all information from meals API call and displays on the page using dynamically created HTMl elements
 function displayFood(foodChoiceObj) {
+    // clears the page (of cards)
     clearPage();
+
+    // this is done to create an array that is only ingredients, and amounts, where 0-19 index are strIngredient1-20, and index 20-39 are strAmount1-20
     var ingArray = Object.entries(foodChoiceObj);
-    ingArray=ingArray.slice(9,ingArray.length-4);
+    ingArray = ingArray.slice(9, ingArray.length - 4);
 
-    b=ingArray;
-
+    // extracts the name and thumbnail image, and then determines what string will appear on the top of the page (dependent on if high or low card chosen)
     var foodName = foodChoiceObj.strMeal;
     var foodImg = foodChoiceObj.strMealThumb;
     if (foodChoiceObj.strCategory === "Vegan") {
@@ -188,10 +188,10 @@ function displayFood(foodChoiceObj) {
         var sassyString = "You picked the high card! <br> <span class='text-4xl'>Dessert's on us, champ.</span>"
     }
 
-    var ingredientList = document.createElement("table");
-    ingredientList.classList.add("table-auto", "pt-6", "pl-12");
-    console.log(ingredientList);
-    ingredientList.innerHTML = `
+    // create a table, assign classes, and add inner HTML for the table headers
+    var ingredientTable = document.createElement("table");
+    ingredientTable.classList.add("table-auto", "pt-6", "pl-12");
+    ingredientTable.innerHTML = `
         <thead>
             <tr class="text-3xl">
                 <th class="px-6 py-4 text-left">Ingredient</th>
@@ -199,34 +199,57 @@ function displayFood(foodChoiceObj) {
             </tr>
         </thead>
     `;
-    var list = document.createElement("tbody");
-    list.classList.add("text-2xl")
+    // creates the body of the table, and gives it a text size via tailwind class
+    var tableBody = document.createElement("tbody");
+    tableBody.classList.add("text-2xl")
 
     // where 20 is the maximum number of ingredients in a recipe
     for (let i = 0; i < 19; i++) {
-        // if there is an ingredient to list, then append it
+        // if there is an ingredient to list (i.e. it's not blank AND it's not null), then append the ingredient and amount
         if (ingArray[i][1] != "" && ingArray[i][1] != null) {
-            var listItem=document.createElement("tr");
-            listItem.innerHTML=`
+            // creates a table row, fills HTMl with classes and relevant info from array (you need to index twice because the first index is just 'strIngredienti')
+            var tableItem = document.createElement("tr");
+            tableItem.innerHTML = `
             <td class="px-6 py-2 text-left">${ingArray[i][1]}</td>
-            <td class="px-6 py-2 text-left">${ingArray[i+20][1]}</td>
+            <td class="px-6 py-2 text-left">${ingArray[i + 20][1]}</td>
             `;
-            list.appendChild(listItem);
+            // add ingredient and amount to table body, i.e list
+            tableBody.appendChild(tableItem);
         };
     };
-    ingredientList.appendChild(list);
+    // add the entire ingredient and amount list to final table
+    ingredientTable.appendChild(tableBody);
+
+    // organizes and cleans and creates line breaks for recipe instructions
+    var instructionsOrganized = foodChoiceObj.strInstructions.split("\r\n");
+    for (var i = 0; i < instructionsOrganized.length; i++) {
+        if (!instructionsOrganized[i]) {
+            instructionsOrganized.splice(i, 1)
+        }
+    }
+    // creates an unordered list
+    var instructionsListEl = document.createElement("ul");
+    instructionsListEl.classList.add("p-7", "list-inside", "list-disc");
+    // creates a list element for each 
+    for (var i = 0; i < instructionsOrganized.length; i++) {
+        var instructionsEl = document.createElement("li");
+        instructionsEl.innerText = instructionsOrganized[i];
+        instructionsListEl.appendChild(instructionsEl);
+    }
 
     currentPageEl.innerHTML = `
-        <div class="recipe-display px-8">
-            <h1 class="recipe-header text-6xl flex flex-col justify-center">${sassyString}</h1>
-            <div class="recipe-name-img flex flex-col text-right content-end">
+        <div class="recipe-display px-10 py-6">
+            <h1 class="recipe-header text-6xl flex flex-col">${sassyString}</h1>
+            <div class="recipe-name-img flex flex-col text-right">
                 <h2 class="text-6xl"><a href="${foodChoiceObj.strYoutube}">${foodName}</a></h2>
-                <img src=${foodImg} id="food-img">
+                <div class="flex justify-end">
+                    <img src=${foodImg} id="food-img" alt="prepared food image">
+                </div>
+                
             </div>
-            <div class ="recipe-instructions pt-7 text-3xl">
-                <h3>${foodChoiceObj.strInstructions}</h3>
+            <div class ="recipe-instructions text-3xl">
             </div>
-            <div class="recipe-ingredients flex justify-center mt-5">
+            <div class="recipe-ingredients flex justify-center pt-5">
             </div>
         </div>
         <div class="flex justify-center mt-5">
@@ -235,37 +258,52 @@ function displayFood(foodChoiceObj) {
         
     `;
     var recipeTable = document.querySelector(".recipe-ingredients");
-    recipeTable.appendChild(ingredientList);
+    recipeTable.appendChild(ingredientTable);
+    document.querySelector(".recipe-instructions").appendChild(instructionsListEl);
 
 
     var foodDisplayEl = document.querySelector("#restart-game");
     foodDisplayEl.addEventListener("click", drawCard);
 }
 
-function getEqual() {
-    // clearPage();
-    var apiUrl = "https://random-d.uk/api/v2/random";
+// would like to get this working but get weird error each time
+// function getEqual() {
+//     // clearPage();
+//     var apiUrl = "https://random-d.uk/api/v2/random";
 
-    fetch(apiUrl).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data);
-                displayEqual(data.url);
-            });
-        } else {
-            // if error, then?
-        }
-    });
-}
+//     fetch(apiUrl).then(function (response) {
+//         if (response.ok) {
+//             response.json().then(function (data) {
+//                 console.log(data);
+//                 displayEqual(data.url);
+//             });
+//         } else {
+//             // if error, then?
+//         }
+//     });
+// }
 
-function displayEqual(imgUrl) {
-    // clearPage();
+function displayEqual() {
+    clearPage();
     currentPageEl.innerHTML = `
-    <div class="current-page">
         <div class="equal-card">
             <h1>Wow, what luck! The probability of getting the same card is less than 0.5%. You're a lucky bug!</h1>
-            <img src=${imgUrl} id="equal-img">
         </div>
-    </div>
-`
+        <div class="flex justify-center mt-5">
+        <button class="btn text-5xl bg-green-500 hover:bg-green-700 p-3 px-5 rounded-full" id="restart-game" type="submit">Wanna try your luck again?</button>
+        </div>
+    `
 }
+
+function modalOpen() {
+    var modal = document.getElementById("modal-content");
+    modal.style.display = "block";
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
+
+document.querySelector(".modal-icon").addEventListener("click", modalOpen);
