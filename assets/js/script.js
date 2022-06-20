@@ -183,23 +183,24 @@ function displayFood(foodChoiceObj) {
     var foodName = foodChoiceObj.strMeal;
     var foodImg = foodChoiceObj.strMealThumb;
     if (foodChoiceObj.strCategory === "Vegan") {
-        var sassyString = "You picked the low card. Here's a vegan meal, loser. ;)";
+        var sassyString = "You picked the low card. <br> <span class='text-4xl'>Here's a vegan meal. ;)</span>";
     } else if (foodChoiceObj.strCategory === "Dessert") {
-        var sassyString = "You picked the high card! Dessert's on us, champ."
+        var sassyString = "You picked the high card! <br> <span class='text-4xl'>Dessert's on us, champ.</span>"
     }
 
     var ingredientList = document.createElement("table");
-    ingredientList.classList.add("table-auto");
+    ingredientList.classList.add("table-auto", "pt-6", "pl-12");
     console.log(ingredientList);
     ingredientList.innerHTML = `
         <thead>
-            <tr>
-                <th>Ingredient</th>
-                <th>Amount</th>
+            <tr class="text-3xl">
+                <th class="px-6 py-4 text-left">Ingredient</th>
+                <th class="px-6 py-4 text-left">Amount</th>
             </tr>
         </thead>
     `;
     var list = document.createElement("tbody");
+    list.classList.add("text-2xl")
 
     // where 20 is the maximum number of ingredients in a recipe
     for (let i = 0; i < 19; i++) {
@@ -207,8 +208,8 @@ function displayFood(foodChoiceObj) {
         if (ingArray[i][1] != "" && ingArray[i][1] != null) {
             var listItem=document.createElement("tr");
             listItem.innerHTML=`
-            <td>${ingArray[i][1]}</td>
-            <td>${ingArray[i+20][1]}</td>
+            <td class="px-6 py-2 text-left">${ingArray[i][1]}</td>
+            <td class="px-6 py-2 text-left">${ingArray[i+20][1]}</td>
             `;
             list.appendChild(listItem);
         };
@@ -216,19 +217,22 @@ function displayFood(foodChoiceObj) {
     ingredientList.appendChild(list);
 
     currentPageEl.innerHTML = `
-        <div class="recipe-display font-serif">
-            <h1 class="recipe-header text-4xl">${sassyString}</h1>
-            <div class="recipe-name-img">
-                <h2>${foodName}</h2>
+        <div class="recipe-display px-8">
+            <h1 class="recipe-header text-6xl flex flex-col justify-center">${sassyString}</h1>
+            <div class="recipe-name-img flex flex-col text-right content-end">
+                <h2 class="text-6xl"><a href="${foodChoiceObj.strYoutube}">${foodName}</a></h2>
                 <img src=${foodImg} id="food-img">
             </div>
-            <div class ="recipe-instructions">
+            <div class ="recipe-instructions pt-7 text-3xl">
                 <h3>${foodChoiceObj.strInstructions}</h3>
             </div>
-            <div class="recipe-ingredients">
+            <div class="recipe-ingredients flex justify-center mt-5">
             </div>
         </div>
-        <button class="btn" id="restart-game" type="submit">Wanna try your luck again?</button>
+        <div class="flex justify-center mt-5">
+            <button class="btn text-5xl bg-green-500 hover:bg-green-700 p-3 px-5 rounded-full" id="restart-game" type="submit">Wanna try your luck again?</button>
+        </div>
+        
     `;
     var recipeTable = document.querySelector(".recipe-ingredients");
     recipeTable.appendChild(ingredientList);
