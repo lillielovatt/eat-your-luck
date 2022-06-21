@@ -73,4 +73,84 @@
 
 
 
+    // takes the value of the 2 cards drawn, and tests to see which is higher/lower
+    // if higher, it assigns an Id of "true"
+    // if lower, it assigns an Id of "false"
+    // if the two cards are the same, it assigns an id to both of "equal", i.e. "cardChoice"
+    // var cardChoice = highCard(cardOne, cardTwo);
+    // if (cardOne === cardChoice) {
+    //     var cardOneId = "true";
+    //     var cardTwoId = "false";
+    // } else if (cardTwo === cardChoice) {
+    //     var cardOneId = "false";
+    //     var cardTwoId = "true";
+    // } else if (cardChoice === "equal") {
+    //     var cardOneId = cardChoice;
+    //     var cardTwoId = cardChoice;
+    // }
+
+    // cardOne, cardTwo, cardOneImg, cardTwoImg
+    // dynamically creates HTMl to display both cards 
+
+    // <!-- <header>
+    //     <div id="myModal" class="px-10 py-6">
+    //         <div class="modal-content">
+    //             <img class="modal-icon"
+    //                 src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Noun_Project_question_mark_icon_1101884_cc.svg">
+    //             <div class="modal hidden" id="modal-content">
+    //                 <h2 class="text-center text-6xl">Welcome to Eat Your Luck!</h2>
+    //                 <br>
+    //                 <p class="text-2xl">Are you hungry right now? I bet you are. <br> Wondering what you should make?
+    //                     Aren't we all! <br> With Eat Your Luck,
+    //                     it's now easier than ever to pick the meal for you, a winner! Or, a <span
+    //                         class="italic">loser?</span>
+    //                 </p>
+    //                 <br>
+    //                 <p class="text-4xl">Why don't you test your luck and find out?</p>
+    //             </div>
+    //         </div>
+    //     </div>
+    // </header> --></div>
+
+
     
+// if (cardOne === cardChoice) {
+//     var cardOneId = "true";
+//     var cardTwoId = "false";
+// } else if (cardTwo === cardChoice) {
+//     var cardOneId = "false";
+//     var cardTwoId = "true";
+// } else if (cardChoice === "equal") {
+//     var cardOneId = cardChoice;
+//     var cardTwoId = cardChoice;
+// }
+
+
+
+// if (userCard === "true") {
+//     // then user picked the high card, and they win, and perform fetch for that
+//     getFood("dessert");
+// } else if (userCard === "false") {
+//     // then user picked the low card, and they lose, and perform fetch for that
+//     getFood("vegan");
+// } else if (userCard === "equal") {
+//     // then user got same card, congratulate and show the probability 
+//     displayEqual();
+// }
+
+// would like to get this working but get weird error each time
+// function getEqual() {
+//     // clearPage();
+//     var apiUrl = "https://random-d.uk/api/v2/random";
+
+//     fetch(apiUrl).then(function (response) {
+//         if (response.ok) {
+//             response.json().then(function (data) {
+//                 console.log(data);
+//                 displayEqual(data.url);
+//             });
+//         } else {
+//             // if error, then?
+//         }
+//     });
+// }
