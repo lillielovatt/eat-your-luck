@@ -164,7 +164,7 @@ function getFoodDetails(foodId) {
                 displayFood(data.meals[0]);
             });
         }
-        else{
+        else {
             // error message in case the API call doesn't work
         }
     });
@@ -295,6 +295,8 @@ function displayEqual() {
     `
 }
 
+var xBtn = document.querySelector('.close');
+
 function modalOpen() {
     var modal = document.getElementById("modal-content");
     modal.style.display = "block";
@@ -303,7 +305,14 @@ function modalOpen() {
             modal.style.display = "none";
         }
     }
+
+    // when x button inside modal is clicked, modal closes
+    xBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
 }
+
+
 
 
 document.querySelector(".modal-icon").addEventListener("click", modalOpen);
