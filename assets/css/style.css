@@ -1,11 +1,9 @@
-<<<<<<< HEAD
 body{
     background-color: rgba(255, 0, 0, 0.626);
 }
 img{
     padding:0;
 }
-=======
 .card{
     background:#eaeaea;
     padding:2em;
@@ -15,4 +13,23 @@ img{
     margin:1em;
 }
 /* will need to convert the above css to tailwind later */
->>>>>>> 0f3cd0b4a1ecb472cb35c5487bc65bc22cce8fd2
+
+#card-div {
+    display: flex;
+    justify-content: center;
+}
+
+#card-h1 {
+    display: flex;
+    justify-content: center;
+
+}
+
+.cards {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.hide {
+    display: none;
+}

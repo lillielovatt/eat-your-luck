@@ -1,6 +1,8 @@
 // fetch for 2 random cards
 const currentPageEl = document.querySelector(".current-page");
 const pickCardEl = document.querySelector(".two-cards");
+const searchBtn = document.querySelector("#search-btn");
+
 
 getEqual();
 
@@ -30,6 +32,7 @@ function highOrLow() {
 
 function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
     console.log(cardOne, cardTwo);
+  
     // dynamically create HTML, that shows two rectangles that are opaque/hidden
 
     // spade - https://svgsilh.com/svg/145116.svg
@@ -53,19 +56,29 @@ function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
     }
 
     currentPageEl.innerHTML = `
-        <div class="pick-card">
-            <h1>Pick a card!</h1>
-            <div class="two-cards">
-                <div class="card-one">
+        <div id="card-rend" class="pick-card hide">
+            <h1 id="card-h1" >Pick a card!</h1>
+            <div id="card-div" class="two-cards">
+                <div class="card-one cards">
                     <img src=${cardOneImg} id="${cardOneId}">
                 </div>
-                <div class="card-two">
+                <div class="card-two cards">
                     <img src=${cardTwoImg} id="${cardTwoId}">
                 </div>
             </div>
         </div>
     `;
+   
+    
 }
+function showCardsDiv(){
+    var searchEl = document.querySelector("#search-main");
+    searchEl.setAttribute("class", "hide");
+    var cardEl = document.querySelector("#card-rend");
+  cardEl.removeAttribute("class");
+    }
+    searchBtn.addEventListener("click", showCardsDiv);
+    console.log("buttonClick");
 
 function highCard(cardOne, cardTwo) {
     var cardArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "JACK", "QUEEN", "KING", "ACE"];
