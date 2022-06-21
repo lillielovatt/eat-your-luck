@@ -67,6 +67,14 @@ img {
     font-weight: bold;
 }
 
+.card-one:hover,
+.card-two:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    cursor: pointer;
+    border-radius: 12%;
+}
+
+
 .close:hover,
 .close:focus {
     color: #000;

@@ -87,7 +87,9 @@ function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
                 <div class="card-one">
                     <img src=${cardOneImg} id="${cardOneId}">
                 </div>
-                <div class="card-two pl-6">
+                <!-- added a div in the middle of this for middle padding because there is a weird thing that happens with styling on hover of cards if you apply padding to individual cards -->
+                <div class='pr-3'></div>
+                <div class="card-two">
                     <img src=${cardTwoImg} id="${cardTwoId}">
                 </div>
             </div>
