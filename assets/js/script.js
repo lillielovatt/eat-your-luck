@@ -55,7 +55,7 @@ function drawCard() {
                 cardDrawnTwoImg = data.cards[1].images.png;
                 cardDrawnOne = data.cards[0].value;
                 cardDrawnTwo = data.cards[1].value;
-                console.log(cardDrawnOneImg,cardDrawnTwoImg, cardDrawnOne,cardDrawnTwo);
+                console.log(cardDrawnOneImg, cardDrawnTwoImg, cardDrawnOne, cardDrawnTwo);
                 // if I don't include this, it gives me an error...even though I don't need to pass these into the function. What???
                 // displayCards(data.cards[0].value, data.cards[1].value, data.cards[0].images.png, data.cards[1].images.png);
             });
@@ -80,7 +80,8 @@ function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
                 <div class="card-one">
                     <img src="./assets/images/card_back.png" id="card-one">
                 </div>
-                <div class="card-two md:pl-6 py-6 md:py-0 ">
+                <div class='md:pr-6'></div>
+                <div class="card-two py-6 md:py-0 ">
                     <img src="./assets/images/card_back.png" id="card-two">
                 </div>
             </div>
@@ -130,7 +131,8 @@ function pickCard(event) {
                 <div class="card-one">
                     <img src="${cardDrawnOneImg}" id="card-one">
                 </div>
-                <div class="card-two md:pl-6 py-6 md:py-0">
+                <div class='md:pr-6'></div>
+                <div class="card-two py-6 md:py-0">
                     <img src="${cardDrawnTwoImg}" id="card-two">
                 </div>
             </div>
@@ -317,14 +319,14 @@ function modalOpen() {
     backgroundImgEl.classList.remove("hidden");
 
 
-    function closeModal(){
+    function closeModal() {
         var modal = document.getElementById("modal-content");
         modal.style.display = "none";
         var backgroundImgEl = document.querySelector(".background-img");
         backgroundImgEl.classList.add("hidden");
     }
 
-    backgroundImgEl.addEventListener("click",closeModal);
+    backgroundImgEl.addEventListener("click", closeModal);
 }
 
 // when you click on the ? image on the left header, then it opens a modal and explains the website.
