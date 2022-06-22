@@ -2,6 +2,12 @@ body {
     min-width: fit-content;
 }
 
+.linked-in {
+    filter: invert(1);
+    width: 3%;
+    position: absolute;
+}
+
 .collaborator {
     background-color: black;
     width: 900px;
@@ -31,7 +37,6 @@ body {
 }
 
 .collaborator img {
-    width: 35%;
     float: left;
 }
 
