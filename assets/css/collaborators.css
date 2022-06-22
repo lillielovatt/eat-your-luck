@@ -1,0 +1,41 @@
+body {
+    min-width: fit-content;
+}
+
+.collaborator {
+    background-color: black;
+    width: 900px;
+    overflow: auto;
+    border: 5px solid white;
+    border-radius: 20px;
+}
+
+.collaborator-bio {
+    padding: 35px;
+    float: left;
+    width: 65%;
+    color: white;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.collaborator-bio h3 {
+    font-size: 32px;
+    margin: 8px 8px 8px 0;
+}
+
+.collaborator img {
+    width: 35%;
+    float: left;
+}
+
+.collaborator p {
+    font-size: 17px;
+    line-height: 1.3;
+}
