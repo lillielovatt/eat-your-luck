@@ -1,13 +1,14 @@
 // global variables, for the current page div element
 const currentPageEl = document.querySelector(".current-page");
+console.log(currentPageEl.getAttribute("id"));
 var cardDrawnOne = "";
 var cardDrawnTwo = "";
 var cardDrawnOneImg = "";
 var cardDrawnTwoImg = "";
+var array = [];
 
-// runs function which draws 2 cards
+// runs function that displays the backs of 2 cards
 displayCards();
-
 
 // askName();
 
@@ -55,21 +56,22 @@ function drawCard() {
                 cardDrawnTwoImg = data.cards[1].images.png;
                 cardDrawnOne = data.cards[0].value;
                 cardDrawnTwo = data.cards[1].value;
-                console.log(cardDrawnOneImg, cardDrawnTwoImg, cardDrawnOne, cardDrawnTwo);
+
+              
                 // if I don't include this, it gives me an error...even though I don't need to pass these into the function. What???
                 // displayCards(data.cards[0].value, data.cards[1].value, data.cards[0].images.png, data.cards[1].images.png);
             });
         } else {
             // display an error in case deck of cards API fails for some reason? 404?
-            console.log("error")
+            clearPage();
+            currentPageEl.innerHTML = "There was an error with the API. How terrible."
+            displayCards();
         }
     });
 }
 
-// console.log(cardDrawnOneImg,cardDrawnTwoImg, cardDrawnOne,cardDrawnTwo);
-
-// takes the 2 random cards drawn in drawCard function and displays them on the page with dynamically created HTML
-function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
+// takes the backs of 2 cards and displays them on the page with dynamically created HTML
+function displayCards() {
     clearPage();
     currentPageEl.innerHTML = `
         <div class="pick-card">
@@ -78,17 +80,17 @@ function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
             </div>
             <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
                 <div class="card-one">
-                    <img src="./assets/images/card_back.png" id="card-one">
+                    <img src="./assets/images/card_back.png" id="card-one" class="mystery-card">
                 </div>
                 <div class='md:pr-6'></div>
                 <div class="card-two py-6 md:py-0 ">
-                    <img src="./assets/images/card_back.png" id="card-two">
+                    <img src="./assets/images/card_back.png" id="card-two" class="mystery-card">
                 </div>
             </div>
         </div>
     `;
     drawCard();
-} //data-url="${cardOneImg}"  data-url="${cardTwoImg}" ${cardOneId} ${cardTwoId}
+}
 
 // determines which of the 2 cards drawn is higher
 function highCard(cardOne, cardTwo) {
@@ -110,52 +112,46 @@ function highCard(cardOne, cardTwo) {
     }
 }
 
-// When the user clicks on the currentPageEl, this function runs.
+// When the user clicks on the mystery-card class (i.e. either back of card image), this function runs.
 function pickCard(event) {
-    if (event.target.tagName === "IMG") { //if you clicked on an image, then
-        // retrieves the Id of that img user clicked on, either card-one or card-two
-        var userCard = event.target.getAttribute("id");
-        var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
+    var userCard = event.target.getAttribute("id");
+    var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
 
-        clearPage();
-        currentPageEl.innerHTML = `
-        <div class="pick-card">
-            <div class="flex justify-center">
-                <h1 class="text-6xl mb-6">Pick a card!</h1>
-            </div>
-            <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
-                <div class="card-one">
-                    <img src="${cardDrawnOneImg}" id="card-one">
+    clearPage();
+    currentPageEl.innerHTML = `
+            <div class="pick-card">
+                <div class="flex justify-center">
+                    <h1 class="text-6xl mb-6">Pick a card!</h1>
                 </div>
-                <div class='md:pr-6'></div>
-                <div class="card-two py-6 md:py-0">
-                    <img src="${cardDrawnTwoImg}" id="card-two">
-                </div>
+              <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
+                  <div class="card-one">
+                      <img src="${cardDrawnOneImg}" id="card-one">
+                 </div>
+                  <div class="card-two py-6 md:py-0">
+                      <img src="${cardDrawnTwoImg}" id="card-two">
+                  </div>
+              </div>
             </div>
-        </div>
-        `;
+            `;
 
-        // want time to pass before I run these functions
-        if (cardHigh === userCard) {
-            // they got it right, high card, yay
-            setTimeout(function () { getFood("dessert"); }, 3000);
-            // getFood("dessert");
-        } else if (cardHigh === "equal") {
-            // equal card
-            // displayEqual();
-            setTimeout(function () { displayEqual(); }, 3000);
-        } else if (cardHigh != userCard) {
-            // picked the low card
-            setTimeout(function () { getFood("vegan"); }, 3000);
-            // getFood("vegan");
-        }
+    // want time to pass before I run these functions
+    if (cardHigh === userCard) {
+        // high card
+        setTimeout(function () { getFood("dessert"); }, 3000);
+    } else if (cardHigh === "equal") {
+        // equal card
+        setTimeout(function () { displayEqual(); }, 3000);
+    } else if (cardHigh != userCard) {
+        // low card
+        setTimeout(function () { getFood("vegan"); }, 3000);
     }
 };
 
 // user selects a card, and pickCard function
-currentPageEl.addEventListener("click", pickCard);
+// currentPageEl.addEventListener("click", pickCard);
+document.querySelector(".mystery-card").addEventListener("click", pickCard);
 
-// once the user has chosen a card, then type of food is chosen
+// once the user has chosen a card, then we found out high OR low, and then type of food is chosen
 function getFood(typeOfFood) {
     var apiUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${typeOfFood}`;
 
@@ -200,8 +196,11 @@ function displayFood(foodChoiceObj) {
     // this is done to create an array that is only ingredients, and amounts, where 0-19 index are strIngredient1-20, and index 20-39 are strAmount1-20
     var ingArray = Object.entries(foodChoiceObj);
     ingArray = ingArray.slice(9, ingArray.length - 4);
+    console.log(ingArray);
+    b = ingArray;
 
     // extracts the name and thumbnail image, and then determines what string will appear on the top of the page (dependent on if high or low card chosen)
+    // to be used later in the dynamically created HTML, just declaring them here to make it look nicer later
     var foodName = foodChoiceObj.strMeal;
     var foodImg = foodChoiceObj.strMealThumb;
     if (foodChoiceObj.strCategory === "Vegan") {
@@ -259,7 +258,7 @@ function displayFood(foodChoiceObj) {
         instructionsEl.innerText = instructionsOrganized[i];
         instructionsListEl.appendChild(instructionsEl);
     };
-    // would like to have sassy string be 7xl
+
     // dynamically created HTML, pulling together all of the pieces created above^
     currentPageEl.innerHTML = `
         <div class="recipe-display px-12 py-6">
@@ -311,13 +310,14 @@ function displayEqual() {
 function modalOpen() {
     var modal = document.getElementById("modal-content");
     modal.style.display = "block";
+    // modal.classList.remove("hidden");
     var backgroundImgEl = document.querySelector(".background-img");
     backgroundImgEl.classList.remove("hidden");
-
 
     function closeModal() {
         var modal = document.getElementById("modal-content");
         modal.style.display = "none";
+        // modal.classList.add("hidden");
         var backgroundImgEl = document.querySelector(".background-img");
         backgroundImgEl.classList.add("hidden");
     }
