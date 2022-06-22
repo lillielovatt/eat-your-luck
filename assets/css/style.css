@@ -24,6 +24,7 @@ img {
 .modal-icon {
     width: 50px;
     height: 50px;
+    cursor: pointer;
 }
 
 #food-img {
@@ -40,13 +41,13 @@ img {
     z-index: 10;
     width: 70%;
     /* height: 80%; */
-    height:fit-content;
+    height: fit-content;
     position: absolute;
 
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    
+
     /* position: fixed;
     /* left: 0;
     top: 0; */
@@ -107,7 +108,7 @@ img {
     text-decoration: none;
     color: black;
     position: relative;
-    z-index:2;
+    z-index: 2;
 }
 
 .youtube-link::before {
@@ -126,4 +127,26 @@ img {
     bottom: 0;
     height: 100%;
     background-color: white;
+}
+
+
+.card-one:hover,
+.card-two:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    cursor: pointer;
+    border-radius: 12%;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }

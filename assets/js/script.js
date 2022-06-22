@@ -56,7 +56,8 @@ function drawCard() {
                 cardDrawnTwoImg = data.cards[1].images.png;
                 cardDrawnOne = data.cards[0].value;
                 cardDrawnTwo = data.cards[1].value;
-                // console.log(cardDrawnOneImg,cardDrawnTwoImg, cardDrawnOne,cardDrawnTwo);
+
+              
                 // if I don't include this, it gives me an error...even though I don't need to pass these into the function. What???
                 // displayCards(data.cards[0].value, data.cards[1].value, data.cards[0].images.png, data.cards[1].images.png);
             });
@@ -81,7 +82,8 @@ function displayCards() {
                 <div class="card-one">
                     <img src="./assets/images/card_back.png" id="card-one" class="mystery-card">
                 </div>
-                <div class="card-two md:pl-6 py-6 md:py-0">
+                <div class='md:pr-6'></div>
+                <div class="card-two py-6 md:py-0 ">
                     <img src="./assets/images/card_back.png" id="card-two" class="mystery-card">
                 </div>
             </div>
@@ -132,6 +134,8 @@ function pickCard(event) {
                     <div class="card-two md:pl-6 py-6 md:py-0">
                         <img src="${cardDrawnTwoImg}">
                     </div>
+                <div class="card-two py-6 md:py-0">
+                    <img src="${cardDrawnTwoImg}" id="card-two">
                 </div>
             </div>
             `;
