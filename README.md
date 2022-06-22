@@ -1,26 +1,5 @@
-# eat-your-luck
+![Eat_Your_Luck (1)](https://user-images.githubusercontent.com/104476257/175168592-f63a203f-470b-4620-8697-83bcb16caaa1.png)
 
+Try out Eat Your Luck and see what you're cooking today. If you're lucky, and choose the high card, it will be tasty. If your luck is running low today, the recipe won't be great. Test it out! Are you feeling lucky? 
 
-
-get image to disappear then reappear
-have a timer run down before showing user's recipe, or else a button?
-
-click on placeholder iamge, run some function
-
-if image attribute id of the image u clock 
-to know that they clicked on the card.
--> imageSrc/set attribute src=source of the actual card
-
-
-create flex box with tailwind so sassyString and the image and title are in the same row, space-evenly
-but when middle size, phone, then displayed like it is now
-- put everything centered, add padding top with wrapped element
-
-
-
-get the background image correct with modal
-tailwind issues - link, correct font with media queries, responsive design etc
-READ ME file
-presentation
-make sure you go to top of page on "refresh"
-
+![final_62b3a5b5789a78008ac5b40f_676114](https://user-images.githubusercontent.com/104476257/175179042-24c7e7e4-44b2-41d1-bb63-b62806220534.gif)
