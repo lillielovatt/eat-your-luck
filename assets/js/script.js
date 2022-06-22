@@ -117,10 +117,6 @@ function pickCard(event) {
         var userCard = event.target.getAttribute("id");
         var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
 
-        // want to be able to update the src of the 2 images, target by ID?
-        // and then add class that puts green border around card if user got the correct card
-        // and red border if they did not. run timer before starting next function?
-
         clearPage();
         currentPageEl.innerHTML = `
         <div class="pick-card">
