@@ -1,13 +1,14 @@
 // global variables, for the current page div element
 const currentPageEl = document.querySelector(".current-page");
+console.log(currentPageEl.getAttribute("id"));
 var cardDrawnOne = "";
 var cardDrawnTwo = "";
 var cardDrawnOneImg = "";
 var cardDrawnTwoImg = "";
+var array = [];
 
-// runs function which draws 2 cards
+// runs function that displays the backs of 2 cards
 displayCards();
-
 
 // askName();
 
@@ -65,8 +66,7 @@ function drawCard() {
     });
 }
 
-// takes the 2 random cards drawn in drawCard function and displays them on the page with dynamically created HTML
-function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
+function displayCards() {
     clearPage();
     currentPageEl.innerHTML = `
         <div class="pick-card">
@@ -85,7 +85,7 @@ function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
         </div>
     `;
     drawCard();
-} 
+}
 
 // determines which of the 2 cards drawn is higher
 function highCard(cardOne, cardTwo) {
@@ -107,7 +107,7 @@ function highCard(cardOne, cardTwo) {
     }
 }
 
-// When the user clicks on the currentPageEl, this function runs.
+// When the user clicks on the mystery-card class (i.e. either back of card image), this function runs.
 function pickCard(event) {
     var userCard = event.target.getAttribute("id");
     var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
@@ -125,7 +125,7 @@ function pickCard(event) {
                     <div class="card-two md:pl-6 py-6 md:py-0">
                         <img src="${cardDrawnTwoImg}">
                     </div>
-                </div>
+              </div>
             </div>
             `;
 
@@ -145,7 +145,7 @@ function pickCard(event) {
 // user selects a card, and pickCard function
 document.querySelector(".mystery-card").addEventListener("click", pickCard);
 
-// once the user has chosen a card, then type of food is chosen
+// once the user has chosen a card, then we found out high OR low, and then type of food is chosen
 function getFood(typeOfFood) {
     var apiUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${typeOfFood}`;
 
@@ -196,8 +196,11 @@ function displayFood(foodChoiceObj) {
     // this is done to create an array that is only ingredients, and amounts, where 0-19 index are strIngredient1-20, and index 20-39 are strAmount1-20
     var ingArray = Object.entries(foodChoiceObj);
     ingArray = ingArray.slice(9, ingArray.length - 4);
+    console.log(ingArray);
+    b = ingArray;
 
     // extracts the name and thumbnail image, and then determines what string will appear on the top of the page (dependent on if high or low card chosen)
+    // to be used later in the dynamically created HTML, just declaring them here to make it look nicer later
     var foodName = foodChoiceObj.strMeal;
     var foodImg = foodChoiceObj.strMealThumb;
     if (foodChoiceObj.strCategory === "Vegan") {
@@ -255,7 +258,7 @@ function displayFood(foodChoiceObj) {
         instructionsEl.innerText = instructionsOrganized[i];
         instructionsListEl.appendChild(instructionsEl);
     };
-    
+
     // dynamically created HTML, pulling together all of the pieces created above^
     currentPageEl.innerHTML = `
         <div class="recipe-display px-12 py-6">
@@ -307,12 +310,14 @@ function displayEqual() {
 function modalOpen() {
     var modal = document.getElementById("modal-content");
     modal.style.display = "block";
+    // modal.classList.remove("hidden");
     var backgroundImgEl = document.querySelector(".background-img");
     backgroundImgEl.classList.remove("hidden");
 
     function closeModal() {
         var modal = document.getElementById("modal-content");
         modal.style.display = "none";
+        // modal.classList.add("hidden");
         var backgroundImgEl = document.querySelector(".background-img");
         backgroundImgEl.classList.add("hidden");
     }
