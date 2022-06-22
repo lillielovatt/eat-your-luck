@@ -1,47 +1,18 @@
 // global variables, for the current page div element
 const currentPageEl = document.querySelector(".current-page");
-console.log(currentPageEl.getAttribute("id"));
 var cardDrawnOne = "";
 var cardDrawnTwo = "";
 var cardDrawnOneImg = "";
 var cardDrawnTwoImg = "";
-var array = [];
 
 // runs function that displays the backs of 2 cards
 displayCards();
-
-// askName();
 
 // function that erases any HTML in the current page element, which is really just a pseudo body element
 function clearPage() {
     while (currentPageEl.firstChild) {
         currentPageEl.removeChild(currentPageEl.lastChild);
     };
-}
-
-// dynamically create HTML for the "enter name" functionality for user to enter name and be addressed as such.
-function askName() {
-    clearPage();
-    currentPageEl.innerHTML = `
-    <div class="mx-auto bg-grey-400 grid place-items-center card">
-        <div class="search flex-column content-center">
-            <h1 class="text-xl font-bold text-center flex w-100">
-                What's your name, Bozo?
-            </h1>
-            <input type="text" class="search-bar rounded flex-auto content-evenly">
-            <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em"
-                    width="1em" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z">
-                    </path>
-                    <path
-                        d="M11.412,8.586C11.791,8.966,12,9.468,12,10h2c0-1.065-0.416-2.069-1.174-2.828c-1.514-1.512-4.139-1.512-5.652,0 l1.412,1.416C9.346,7.83,10.656,7.832,11.412,8.586z">
-                    </path>
-                </svg></button>
-        </div>
-    </div>
-    `
-    // add event Listener for when user has entered name and clicked submit?
 }
 
 // API call to draw 2 random cards
@@ -56,16 +27,18 @@ function drawCard() {
                 cardDrawnTwoImg = data.cards[1].images.png;
                 cardDrawnOne = data.cards[0].value;
                 cardDrawnTwo = data.cards[1].value;
+                console.log("cards drawn");
             });
         } else {
             // display an error in case deck of cards API fails for some reason
             clearPage();
             currentPageEl.innerHTML = "There was an error. How terrible."
-            setTimeout(function(){displayCards();}, 2000);
+            setTimeout(function () { displayCards(); }, 2000);
         }
     });
 }
 
+// displays the backs of 2 cards, and calls drawCard
 function displayCards() {
     clearPage();
     currentPageEl.innerHTML = `
@@ -107,13 +80,14 @@ function highCard(cardOne, cardTwo) {
     }
 }
 
-// When the user clicks on the mystery-card class (i.e. either back of card image), this function runs.
+// once user clicks on the back of a card (with class="mystery-card"), then we run the function to display the cards and reveal fate
 function pickCard(event) {
-    var userCard = event.target.getAttribute("id");
-    var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
+    if (event.target.getAttribute('class') === "mystery-card") {
+        var userCard = event.target.getAttribute("id");
+        var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
 
-    clearPage();
-    currentPageEl.innerHTML = `
+        clearPage();
+        currentPageEl.innerHTML = `
             <div class="pick-card">
                 <div class="flex justify-center">
                     <h1 class="text-6xl mb-6">Pick a card!</h1>
@@ -128,22 +102,22 @@ function pickCard(event) {
               </div>
             </div>
             `;
-
-    // want time to pass before I run these functions
-    if (cardHigh === userCard) {
-        // high card
-        setTimeout(function () { getFood("dessert"); }, 2000);
-    } else if (cardHigh === "equal") {
-        // equal card
-        setTimeout(function () { displayEqual(); }, 2000);
-    } else if (cardHigh != userCard) {
-        // low card
-        setTimeout(function () { getFood("vegan"); }, 2000);
+        // want time to pass before I run these functions
+        if (cardHigh === userCard) {
+            // high card
+            setTimeout(function () { getFood("dessert"); }, 2000);
+        } else if (cardHigh === "equal") {
+            // equal card
+            setTimeout(function () { displayEqual(); }, 2000);
+        } else if (cardHigh != userCard) {
+            // low card
+            setTimeout(function () { getFood("vegan"); }, 2000);
+        }
     }
-};
+}
 
 // user selects a card, and pickCard function
-document.querySelector(".mystery-card").addEventListener("click", pickCard);
+currentPageEl.addEventListener("click", pickCard);
 
 // once the user has chosen a card, then we found out high OR low, and then type of food is chosen
 function getFood(typeOfFood) {
@@ -159,7 +133,7 @@ function getFood(typeOfFood) {
             // some error message in case the API call doesn't work
             clearPage();
             currentPageEl.innerHTML = "There was an error. How terrible."
-            setTimeout(function(){displayCards();}, 2000);
+            setTimeout(function () { displayCards(); }, 2000);
         }
     });
 }
@@ -183,7 +157,7 @@ function getFoodDetails(foodId) {
             // error message in case the API call doesn't work
             clearPage();
             currentPageEl.innerHTML = "There was an error. How terrible."
-            setTimeout(function(){displayCards();}, 2000);
+            setTimeout(function () { displayCards(); }, 2000);
         }
     });
 }
@@ -196,8 +170,6 @@ function displayFood(foodChoiceObj) {
     // this is done to create an array that is only ingredients, and amounts, where 0-19 index are strIngredient1-20, and index 20-39 are strAmount1-20
     var ingArray = Object.entries(foodChoiceObj);
     ingArray = ingArray.slice(9, ingArray.length - 4);
-    console.log(ingArray);
-    b = ingArray;
 
     // extracts the name and thumbnail image, and then determines what string will appear on the top of the page (dependent on if high or low card chosen)
     // to be used later in the dynamically created HTML, just declaring them here to make it look nicer later
@@ -320,8 +292,6 @@ function modalOpen() {
         // modal.classList.add("hidden");
         var backgroundImgEl = document.querySelector(".background-img");
         backgroundImgEl.classList.add("hidden");
-
-
     }
 
     // var/function to close modal when user clicks 'x' icon
