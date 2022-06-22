@@ -55,18 +55,15 @@ function drawCard() {
                 cardDrawnTwoImg = data.cards[1].images.png;
                 cardDrawnOne = data.cards[0].value;
                 cardDrawnTwo = data.cards[1].value;
-                console.log(cardDrawnOneImg, cardDrawnTwoImg, cardDrawnOne, cardDrawnTwo);
-                // if I don't include this, it gives me an error...even though I don't need to pass these into the function. What???
-                // displayCards(data.cards[0].value, data.cards[1].value, data.cards[0].images.png, data.cards[1].images.png);
             });
         } else {
-            // display an error in case deck of cards API fails for some reason? 404?
-            console.log("error")
+            // display an error in case deck of cards API fails for some reason
+            clearPage();
+            currentPageEl.innerHTML = "There was an error. How terrible."
+            setTimeout(function(){displayCards();}, 2000);
         }
     });
 }
-
-// console.log(cardDrawnOneImg,cardDrawnTwoImg, cardDrawnOne,cardDrawnTwo);
 
 // takes the 2 random cards drawn in drawCard function and displays them on the page with dynamically created HTML
 function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
@@ -78,17 +75,17 @@ function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
             </div>
             <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
                 <div class="card-one">
-                    <img src="./assets/images/card_back.png" id="card-one">
+                    <img src="./assets/images/card_back.png" id="card-one" class="mystery-card">
                 </div>
                 <div class='md:pr-6'></div>
-                <div class="card-two py-6 md:py-0 ">
-                    <img src="./assets/images/card_back.png" id="card-two">
+                <div class="card-two py-6 md:py-0">
+                    <img src="./assets/images/card_back.png" id="card-two" class="mystery-card">
                 </div>
             </div>
         </div>
     `;
     drawCard();
-} //data-url="${cardOneImg}"  data-url="${cardTwoImg}" ${cardOneId} ${cardTwoId}
+} 
 
 // determines which of the 2 cards drawn is higher
 function highCard(cardOne, cardTwo) {
@@ -112,48 +109,41 @@ function highCard(cardOne, cardTwo) {
 
 // When the user clicks on the currentPageEl, this function runs.
 function pickCard(event) {
-    if (event.target.tagName === "IMG") { //if you clicked on an image, then
-        // retrieves the Id of that img user clicked on, either card-one or card-two
-        var userCard = event.target.getAttribute("id");
-        var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
+    var userCard = event.target.getAttribute("id");
+    var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
 
-        clearPage();
-        currentPageEl.innerHTML = `
-        <div class="pick-card">
-            <div class="flex justify-center">
-                <h1 class="text-6xl mb-6">Pick a card!</h1>
-            </div>
-            <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
-                <div class="card-one">
-                    <img src="${cardDrawnOneImg}" id="card-one">
+    clearPage();
+    currentPageEl.innerHTML = `
+            <div class="pick-card">
+                <div class="flex justify-center">
+                    <h1 class="text-6xl mb-6">Pick a card!</h1>
                 </div>
-                <div class='md:pr-6'></div>
-                <div class="card-two py-6 md:py-0">
-                    <img src="${cardDrawnTwoImg}" id="card-two">
+                <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
+                    <div class="card-one">
+                        <img src="${cardDrawnOneImg}">
+                    </div>
+                    <div class="card-two md:pl-6 py-6 md:py-0">
+                        <img src="${cardDrawnTwoImg}">
+                    </div>
                 </div>
             </div>
-        </div>
-        `;
+            `;
 
-        // want time to pass before I run these functions
-        if (cardHigh === userCard) {
-            // they got it right, high card, yay
-            setTimeout(function () { getFood("dessert"); }, 3000);
-            // getFood("dessert");
-        } else if (cardHigh === "equal") {
-            // equal card
-            // displayEqual();
-            setTimeout(function () { displayEqual(); }, 3000);
-        } else if (cardHigh != userCard) {
-            // picked the low card
-            setTimeout(function () { getFood("vegan"); }, 3000);
-            // getFood("vegan");
-        }
+    // want time to pass before I run these functions
+    if (cardHigh === userCard) {
+        // high card
+        setTimeout(function () { getFood("dessert"); }, 2000);
+    } else if (cardHigh === "equal") {
+        // equal card
+        setTimeout(function () { displayEqual(); }, 2000);
+    } else if (cardHigh != userCard) {
+        // low card
+        setTimeout(function () { getFood("vegan"); }, 2000);
     }
 };
 
 // user selects a card, and pickCard function
-currentPageEl.addEventListener("click", pickCard);
+document.querySelector(".mystery-card").addEventListener("click", pickCard);
 
 // once the user has chosen a card, then type of food is chosen
 function getFood(typeOfFood) {
@@ -167,6 +157,9 @@ function getFood(typeOfFood) {
             });
         } else {
             // some error message in case the API call doesn't work
+            clearPage();
+            currentPageEl.innerHTML = "There was an error. How terrible."
+            setTimeout(function(){displayCards();}, 2000);
         }
     });
 }
@@ -188,6 +181,9 @@ function getFoodDetails(foodId) {
         }
         else {
             // error message in case the API call doesn't work
+            clearPage();
+            currentPageEl.innerHTML = "There was an error. How terrible."
+            setTimeout(function(){displayCards();}, 2000);
         }
     });
 }
@@ -259,7 +255,7 @@ function displayFood(foodChoiceObj) {
         instructionsEl.innerText = instructionsOrganized[i];
         instructionsListEl.appendChild(instructionsEl);
     };
-    // would like to have sassy string be 7xl
+    
     // dynamically created HTML, pulling together all of the pieces created above^
     currentPageEl.innerHTML = `
         <div class="recipe-display px-12 py-6">
@@ -313,7 +309,6 @@ function modalOpen() {
     modal.style.display = "block";
     var backgroundImgEl = document.querySelector(".background-img");
     backgroundImgEl.classList.remove("hidden");
-
 
     function closeModal() {
         var modal = document.getElementById("modal-content");
