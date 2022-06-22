@@ -117,26 +117,20 @@ function pickCard(event) {
     var userCard = event.target.getAttribute("id");
     var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
 
-    // want to be able to update the src of the 2 images, target by ID?
-    // and then add class that puts green border around card if user got the correct card
-    // and red border if they did not. run timer before starting next function?
-
     clearPage();
     currentPageEl.innerHTML = `
             <div class="pick-card">
                 <div class="flex justify-center">
                     <h1 class="text-6xl mb-6">Pick a card!</h1>
                 </div>
-                <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
-                    <div class="card-one">
-                        <img src="${cardDrawnOneImg}">
-                    </div>
-                    <div class="card-two md:pl-6 py-6 md:py-0">
-                        <img src="${cardDrawnTwoImg}">
-                    </div>
-                <div class="card-two py-6 md:py-0">
-                    <img src="${cardDrawnTwoImg}" id="card-two">
-                </div>
+              <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
+                  <div class="card-one">
+                      <img src="${cardDrawnOneImg}" id="card-one">
+                 </div>
+                  <div class="card-two py-6 md:py-0">
+                      <img src="${cardDrawnTwoImg}" id="card-two">
+                  </div>
+              </div>
             </div>
             `;
 

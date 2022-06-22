@@ -175,7 +175,11 @@
     //     modal.style.display = "none";
     // }
 
+
     // console.log(cardDrawnOneImg,cardDrawnTwoImg, cardDrawnOne,cardDrawnTwo);
 // cardOne, cardTwo, cardOneImg, cardTwoImg
 
 //data-url="${cardOneImg}"  data-url="${cardTwoImg}" ${cardOneId} ${cardTwoId}
+
+    // <!-- <link rel="stylesheet" href="./assets/css/style.css" /> -->
+    // <!-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> -->
