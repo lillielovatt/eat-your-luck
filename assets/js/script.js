@@ -56,21 +56,16 @@ function drawCard() {
                 cardDrawnTwoImg = data.cards[1].images.png;
                 cardDrawnOne = data.cards[0].value;
                 cardDrawnTwo = data.cards[1].value;
-
-              
-                // if I don't include this, it gives me an error...even though I don't need to pass these into the function. What???
-                // displayCards(data.cards[0].value, data.cards[1].value, data.cards[0].images.png, data.cards[1].images.png);
             });
         } else {
-            // display an error in case deck of cards API fails for some reason? 404?
+            // display an error in case deck of cards API fails for some reason
             clearPage();
-            currentPageEl.innerHTML = "There was an error with the API. How terrible."
-            displayCards();
+            currentPageEl.innerHTML = "There was an error. How terrible."
+            setTimeout(function(){displayCards();}, 2000);
         }
     });
 }
 
-// takes the backs of 2 cards and displays them on the page with dynamically created HTML
 function displayCards() {
     clearPage();
     currentPageEl.innerHTML = `
@@ -83,7 +78,7 @@ function displayCards() {
                     <img src="./assets/images/card_back.png" id="card-one" class="mystery-card">
                 </div>
                 <div class='md:pr-6'></div>
-                <div class="card-two py-6 md:py-0 ">
+                <div class="card-two py-6 md:py-0">
                     <img src="./assets/images/card_back.png" id="card-two" class="mystery-card">
                 </div>
             </div>
@@ -123,13 +118,13 @@ function pickCard(event) {
                 <div class="flex justify-center">
                     <h1 class="text-6xl mb-6">Pick a card!</h1>
                 </div>
-              <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
-                  <div class="card-one">
-                      <img src="${cardDrawnOneImg}" id="card-one">
-                 </div>
-                  <div class="card-two py-6 md:py-0">
-                      <img src="${cardDrawnTwoImg}" id="card-two">
-                  </div>
+                <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
+                    <div class="card-one">
+                        <img src="${cardDrawnOneImg}">
+                    </div>
+                    <div class="card-two md:pl-6 py-6 md:py-0">
+                        <img src="${cardDrawnTwoImg}">
+                    </div>
               </div>
             </div>
             `;
@@ -137,18 +132,17 @@ function pickCard(event) {
     // want time to pass before I run these functions
     if (cardHigh === userCard) {
         // high card
-        setTimeout(function () { getFood("dessert"); }, 3000);
+        setTimeout(function () { getFood("dessert"); }, 2000);
     } else if (cardHigh === "equal") {
         // equal card
-        setTimeout(function () { displayEqual(); }, 3000);
+        setTimeout(function () { displayEqual(); }, 2000);
     } else if (cardHigh != userCard) {
         // low card
-        setTimeout(function () { getFood("vegan"); }, 3000);
+        setTimeout(function () { getFood("vegan"); }, 2000);
     }
 };
 
 // user selects a card, and pickCard function
-// currentPageEl.addEventListener("click", pickCard);
 document.querySelector(".mystery-card").addEventListener("click", pickCard);
 
 // once the user has chosen a card, then we found out high OR low, and then type of food is chosen
@@ -163,6 +157,9 @@ function getFood(typeOfFood) {
             });
         } else {
             // some error message in case the API call doesn't work
+            clearPage();
+            currentPageEl.innerHTML = "There was an error. How terrible."
+            setTimeout(function(){displayCards();}, 2000);
         }
     });
 }
@@ -184,6 +181,9 @@ function getFoodDetails(foodId) {
         }
         else {
             // error message in case the API call doesn't work
+            clearPage();
+            currentPageEl.innerHTML = "There was an error. How terrible."
+            setTimeout(function(){displayCards();}, 2000);
         }
     });
 }
