@@ -174,3 +174,8 @@
     //     // }
     //     modal.style.display = "none";
     // }
+
+    // console.log(cardDrawnOneImg,cardDrawnTwoImg, cardDrawnOne,cardDrawnTwo);
+// cardOne, cardTwo, cardOneImg, cardTwoImg
+
+//data-url="${cardOneImg}"  data-url="${cardTwoImg}" ${cardOneId} ${cardTwoId}
