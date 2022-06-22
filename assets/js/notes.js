@@ -192,3 +192,121 @@
 //data-url="${cardOneImg}"  data-url="${cardTwoImg}" ${cardOneId} ${cardTwoId}
 
 
+
+
+
+
+// user selects a card, and pickCard function
+
+// var pickCard = document.querySelector(".mystery-card");
+// pickCard.onclick = (event) => {
+//     var userCard = event.target.getAttribute("id");
+//     var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
+//     console.log(event.target);
+//     console.log(userCard);
+//     console.log("card picked");
+//     console.log(cardDrawnOneImg);
+
+//     clearPage();
+//     currentPageEl.innerHTML = `
+//             <div class="pick-card">
+//                 <div class="flex justify-center">
+//                     <h1 class="text-6xl mb-6">Pick a card!</h1>
+//                 </div>
+//                 <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
+//                     <div class="card-one">
+//                         <img src="${cardDrawnOneImg}">
+//                     </div>
+//                     <div class="card-two md:pl-6 py-6 md:py-0">
+//                         <img src="${cardDrawnTwoImg}">
+//                     </div>
+//               </div>
+//             </div>
+//             `;
+//     console.log("HTML updated");
+//     // want time to pass before I run these functions
+//     if (cardHigh === userCard) {
+//         // high card
+//         console.log("dessert");
+//         setTimeout(function () { getFood("dessert"); }, 2000);
+//     } else if (cardHigh === "equal") {
+//         // equal card
+//         console.log("equal");
+//         setTimeout(function () { displayEqual(); }, 2000);
+//     } else if (cardHigh != userCard) {
+//         // low card
+//         console.log("vegan");
+//         setTimeout(function () { getFood("vegan"); }, 2000);
+//     }
+
+// };
+
+// document.querySelector(".mystery-card").addEventListener("click", pickCard);
+
+// When the user clicks on the mystery-card class (i.e. either back of card image), this function runs.
+// function pickCard(event) {
+//     var userCard = event.target.getAttribute("id");
+//     var cardHigh = highCard(cardDrawnOne, cardDrawnTwo);
+//     console.log("hello");
+//     console.log(cardDrawnOneImg);
+
+//     clearPage();
+//     currentPageEl.innerHTML = `
+//             <div class="pick-card">
+//                 <div class="flex justify-center">
+//                     <h1 class="text-6xl mb-6">Pick a card!</h1>
+//                 </div>
+//                 <div class="two-cards flex md:flex-row md:justify-center flex-col items-center">
+//                     <div class="card-one">
+//                         <img src="${cardDrawnOneImg}">
+//                     </div>
+//                     <div class="card-two md:pl-6 py-6 md:py-0">
+//                         <img src="${cardDrawnTwoImg}">
+//                     </div>
+//               </div>
+//             </div>
+//             `;
+//     console.log("again");
+//     // want time to pass before I run these functions
+//     if (cardHigh === userCard) {
+//         // high card
+//         console.log("dessert");
+//         setTimeout(function () { getFood("dessert"); }, 2000);
+//     } else if (cardHigh === "equal") {
+//         // equal card
+//         console.log("again");
+//         setTimeout(function () { displayEqual(); }, 2000);
+//     } else if (cardHigh != userCard) {
+//         // low card
+//         console.log("vegan");
+//         setTimeout(function () { getFood("vegan"); }, 2000);
+//     }
+// };
+
+
+
+
+// dynamically create HTML for the "enter name" functionality for user to enter name and be addressed as such.
+// function askName() {
+//     clearPage();
+//     currentPageEl.innerHTML = `
+//     <div class="mx-auto bg-grey-400 grid place-items-center card">
+//         <div class="search flex-column content-center">
+//             <h1 class="text-xl font-bold text-center flex w-100">
+//                 What's your name, Bozo?
+//             </h1>
+//             <input type="text" class="search-bar rounded flex-auto content-evenly">
+//             <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em"
+//                     width="1em" xmlns="http://www.w3.org/2000/svg">
+//                     <path
+//                         d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z">
+//                     </path>
+//                     <path
+//                         d="M11.412,8.586C11.791,8.966,12,9.468,12,10h2c0-1.065-0.416-2.069-1.174-2.828c-1.514-1.512-4.139-1.512-5.652,0 l1.412,1.416C9.346,7.83,10.656,7.832,11.412,8.586z">
+//                     </path>
+//                 </svg></button>
+//         </div>
+//     </div>
+//     `
+//     // add event Listener for when user has entered name and clicked submit?
+// }
