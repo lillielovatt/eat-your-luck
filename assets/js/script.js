@@ -80,7 +80,7 @@ function displayCards(cardOne, cardTwo, cardOneImg, cardTwoImg) {
                 <div class="card-one">
                     <img src="./assets/images/card_back.png" id="card-one">
                 </div>
-                <div class="card-two md:pl-6 pt-6 md:pt-0">
+                <div class="card-two md:pl-6 py-6 md:py-0 ">
                     <img src="./assets/images/card_back.png" id="card-two">
                 </div>
             </div>
@@ -130,7 +130,7 @@ function pickCard(event) {
                 <div class="card-one">
                     <img src="${cardDrawnOneImg}" id="card-one">
                 </div>
-                <div class="card-two md:pl-6 pt-6 md:pt-0">
+                <div class="card-two md:pl-6 py-6 md:py-0">
                     <img src="${cardDrawnTwoImg}" id="card-two">
                 </div>
             </div>
@@ -207,9 +207,9 @@ function displayFood(foodChoiceObj) {
     var foodName = foodChoiceObj.strMeal;
     var foodImg = foodChoiceObj.strMealThumb;
     if (foodChoiceObj.strCategory === "Vegan") {
-        var sassyString = "You picked the low card. <br> <span class='text-4xl'>Here's a vegan meal. ;)</span>";
+        var sassyString = "You picked the low card. <br> <span class='md:text-4xl sm:text-3xl'>Here's a vegan meal. ;)</span>";
     } else if (foodChoiceObj.strCategory === "Dessert") {
-        var sassyString = "You picked the high card! <br> <span class='text-4xl'>Dessert's on us, champ.</span>"
+        var sassyString = "You picked the high card! <br> <span class='md:text-4xl sm:text-3xl'>Dessert's on us, champ.</span>"
     }
 
     // create a table, assign classes, and add inner HTML for the table headers
@@ -265,23 +265,22 @@ function displayFood(foodChoiceObj) {
     // dynamically created HTML, pulling together all of the pieces created above^
     currentPageEl.innerHTML = `
         <div class="recipe-display px-12 py-6">
-            <div class="flex justify-between">
-            <h1 class="recipe-header text-6xl flex flex-col">${sassyString}</h1>
-            <div class="recipe-name-img flex flex-col text-right">
-                <h2 class="text-6xl"><a class="underline-offset-4" href="${foodChoiceObj.strYoutube}">${foodName}</a></h2>
-                <div class="flex justify-end">
-                    <img src=${foodImg} id="food-img" alt="prepared food image">
+            <div class="md:flex md:justify-between">
+                <h1 class="recipe-header text-4xl md:text-7xl md:flex md:flex-col">${sassyString}</h1>
+                <div class="recipe-name-img flex flex-col text-right sm:pt-6 md:pt-0">
+                    <h2 class="md:text-6xl text-4xl"><a class="youtube-link" href="${foodChoiceObj.strYoutube}">${foodName}</a></h2>
+                    <div class="flex justify-end">
+                        <img src=${foodImg} id="food-img" alt="prepared food image">
+                    </div>
                 </div>
             </div>
+            <div class ="recipe-instructions md:text-4xl text-2xl pt-10 md:px-16">
             </div>
-
-            <div class ="recipe-instructions text-3xl">
-            </div>
-            <div class="recipe-ingredients flex justify-center pt-5">
+            <div class="recipe-ingredients flex justify-center pt-10">
             </div>
         </div>
-        <div class="flex justify-center mt-5">
-            <button class="btn text-5xl bg-green-500 hover:bg-green-700 p-3 px-5 rounded-full" id="restart" type="submit">Wanna try your luck again?</button>
+        <div class="flex justify-center my-5">
+            <button class="btn md:text-5xl text-4xl bg-green-500 hover:bg-green-700 p-3 px-5 rounded-full" id="restart" type="submit">Wanna try your luck again?</button>
         </div>
         
     `;
@@ -301,10 +300,10 @@ function displayEqual() {
     clearPage();
     currentPageEl.innerHTML = `
         <div class="equal-card">
-            <h1 class="text-4xl px-12 py-6">Wow, what luck! The probability of getting the same card is less than 0.5%. You're a lucky bug!</h1>
+            <h1 class="md:text-6xl px-12 py-6 sm:text-3xl">Wow, what luck! The probability of getting the same card is less than 0.5%. You're a lucky bug!</h1>
         </div>
-        <div class="flex justify-center mt-5">
-        <button class="btn text-5xl bg-green-500 hover:bg-green-700 p-3 px-5 rounded-full" id="restart" type="submit">Wanna try your luck again?</button>
+        <div class="flex justify-center my-5">
+            <button class="btn md:text-5xl text-4xl bg-green-500 hover:bg-green-700 p-3 px-5 rounded-full" id="restart" type="submit">Wanna try your luck again?</button>
         </div>
     `;
     var foodDisplayEl = document.querySelector("#restart");
@@ -314,24 +313,18 @@ function displayEqual() {
 function modalOpen() {
     var modal = document.getElementById("modal-content");
     modal.style.display = "block";
+    var backgroundImgEl = document.querySelector(".background-img");
+    backgroundImgEl.classList.remove("hidden");
 
-    // create some sort of background, perhaps transparent, that would allow me to target it below--normally it is hidden
-    // when this function runs, we make it not hidden
-    // then if you click on the background, then modal.style.display = "none";
 
-    // ^element to target that background, add event listener, run some function -> modal.style.display = "none" and make background hidden again. modal should be x+1
+    function closeModal(){
+        var modal = document.getElementById("modal-content");
+        modal.style.display = "none";
+        var backgroundImgEl = document.querySelector(".background-img");
+        backgroundImgEl.classList.add("hidden");
+    }
 
-    // position absolute, top left bottom right 0. z index could be X - for background image
-
-    // add
-
-    // when you click OUTSIDE OF THE MODAL, the modal closes.
-    // window.onclick = function () {
-    //     // if (event.target != modal) {
-    //     //     modal.style.display = "none";
-    //     // }
-    //     modal.style.display = "none";
-    // }
+    backgroundImgEl.addEventListener("click",closeModal);
 }
 
 // when you click on the ? image on the left header, then it opens a modal and explains the website.

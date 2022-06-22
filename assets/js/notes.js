@@ -154,3 +154,23 @@
 //         }
 //     });
 // }
+
+
+
+    // create some sort of background, perhaps transparent, that would allow me to target it below--normally it is hidden
+    // when this function runs, we make it not hidden
+    // then if you click on the background, then modal.style.display = "none";
+
+    // ^element to target that background, add event listener, run some function -> modal.style.display = "none" and make background hidden again. modal should be x+1
+
+    // position absolute, top left bottom right 0. z index could be X - for background image
+
+    // add
+
+    // when you click OUTSIDE OF THE MODAL, the modal closes.
+    // window.onclick = function () {
+    //     // if (event.target != modal) {
+    //     //     modal.style.display = "none";
+    //     // }
+    //     modal.style.display = "none";
+    // }
