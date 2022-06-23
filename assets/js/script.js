@@ -304,7 +304,7 @@ function modalOpen() {
         backgroundImgEl.addEventListener("click", closeModal);
     })
 
-    groundImgEl.classList.add("hidden");
+    // groundImgEl.classList.add("hidden");
 }
 
 // when you click on the ? image on the left header, then it opens a modal and explains the website.
