@@ -56,7 +56,7 @@ function displayCards() {
             </div>
         </div>
     `;
-    document.querySelector(".mystery-card").addEventListener("click", pickCard);
+    // document.querySelector(".mystery-card").addEventListener("click", pickCard);
     drawCard();
 }
 
@@ -117,7 +117,7 @@ function pickCard(event) {
 }
 
 // user selects a card, and pickCard function
-// currentPageEl.addEventListener("click", pickCard);
+currentPageEl.addEventListener("click", pickCard);
 // document.querySelector(".mystery-card").addEventListener("click", pickCard);
 
 // once the user has chosen a card, then we found out high OR low, and then type of food is chosen
