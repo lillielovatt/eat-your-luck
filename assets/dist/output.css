@@ -629,6 +629,10 @@ video {
   width: 7rem;
 }
 
+.w-\[35\%\] {
+  width: 35%;
+}
+
 .flex-auto {
   flex: 1 1 auto;
 }
