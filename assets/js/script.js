@@ -294,17 +294,17 @@ function modalOpen() {
         backgroundImgEl.classList.add("hidden");
     }
 
-    // var/function to close modal when user clicks 'x' icon
-    var xBtn = document.querySelector('.close')
-    xBtn.addEventListener('click', function () {
-        var backgroundImgEl = document.querySelector(".background-img");
-        modal.style.display = 'none';
-        backgroundImgEl.classList.add("hidden");
+    backgroundImgEl.addEventListener("click", closeModal);
+    // // var/function to close modal when user clicks 'x' icon
+    // var xBtn = document.querySelector('.close')
+    // xBtn.addEventListener('click', function () {
+    //     var backgroundImgEl = document.querySelector(".background-img");
+    //     modal.style.display = 'none';
+    //     backgroundImgEl.classList.add("hidden");
 
-        backgroundImgEl.addEventListener("click", closeModal);
-    })
-
-    groundImgEl.classList.add("hidden");
+    //     
+    // })
+    // groundImgEl.classList.add("hidden");
 }
 
 // when you click on the ? image on the left header, then it opens a modal and explains the website.
