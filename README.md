@@ -9,7 +9,7 @@ Try out Eat Your Luck and see what you're cooking today. If you're lucky, and ch
 Click on the link below. Once the browser opens, you will pe prompted to pick a card. Once you pick the low or high card, you will recieve a recipe depending on your luck. If you want to try your luck again you can click the 'Wanna try your luck again?' button. 
 
 ### Link
-
+https://lillielovatt.github.io/eat-your-luck/
 
 ### Built With
 * Html
