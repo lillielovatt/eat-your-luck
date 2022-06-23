@@ -27,7 +27,6 @@ function drawCard() {
                 cardDrawnTwoImg = data.cards[1].images.png;
                 cardDrawnOne = data.cards[0].value;
                 cardDrawnTwo = data.cards[1].value;
-                console.log("cards drawn");
             });
         } else {
             // display an error in case deck of cards API fails for some reason
@@ -57,6 +56,7 @@ function displayCards() {
             </div>
         </div>
     `;
+    document.querySelector(".mystery-card").addEventListener("click", pickCard);
     drawCard();
 }
 
@@ -117,7 +117,8 @@ function pickCard(event) {
 }
 
 // user selects a card, and pickCard function
-currentPageEl.addEventListener("click", pickCard);
+// currentPageEl.addEventListener("click", pickCard);
+// document.querySelector(".mystery-card").addEventListener("click", pickCard);
 
 // once the user has chosen a card, then we found out high OR low, and then type of food is chosen
 function getFood(typeOfFood) {
@@ -176,7 +177,7 @@ function displayFood(foodChoiceObj) {
     var foodName = foodChoiceObj.strMeal;
     var foodImg = foodChoiceObj.strMealThumb;
     if (foodChoiceObj.strCategory === "Vegan") {
-        var sassyString = "You picked the low card. <br> <span class='md:text-4xl sm:text-3xl'>Here's a vegan meal. ;)</span>";
+        var sassyString = "You picked the low card. <br> <span class='md:text-4xl sm:text-3xl'>Here's a vegan meal, <span class='font-bold'>loser.</span> </span>";
     } else if (foodChoiceObj.strCategory === "Dessert") {
         var sassyString = "You picked the high card! <br> <span class='md:text-4xl sm:text-3xl'>Dessert's on us, champ.</span>"
     }
@@ -282,29 +283,25 @@ function displayEqual() {
 function modalOpen() {
     var modal = document.getElementById("modal-content");
     modal.style.display = "block";
-    // modal.classList.remove("hidden");
     var backgroundImgEl = document.querySelector(".background-img");
     backgroundImgEl.classList.remove("hidden");
 
     function closeModal() {
         var modal = document.getElementById("modal-content");
         modal.style.display = "none";
-        // modal.classList.add("hidden");
         var backgroundImgEl = document.querySelector(".background-img");
         backgroundImgEl.classList.add("hidden");
     }
 
     backgroundImgEl.addEventListener("click", closeModal);
-    // // var/function to close modal when user clicks 'x' icon
-    // var xBtn = document.querySelector('.close')
-    // xBtn.addEventListener('click', function () {
-    //     var backgroundImgEl = document.querySelector(".background-img");
-    //     modal.style.display = 'none';
-    //     backgroundImgEl.classList.add("hidden");
 
-    //     
-    // })
-    // groundImgEl.classList.add("hidden");
+    // var/function to close modal when user clicks 'x' icon
+    var xBtn = document.querySelector('.close');
+    xBtn.addEventListener('click', function () {
+        var backgroundImgEl = document.querySelector(".background-img");
+        modal.style.display = 'none';
+        backgroundImgEl.classList.add("hidden");
+    });
 }
 
 // when you click on the ? image on the left header, then it opens a modal and explains the website.
